@@ -59,7 +59,6 @@ def piazza_parse(pi_url):
 
     return temp
 
-<<<<<<< HEAD
 def sandbox():
     p = Piazza()
     p.user_login(email=os.environ['EMAIL'], password=os.environ['PASSWORD'])
@@ -101,8 +100,7 @@ def sandbox():
 
 # When you run this file, it will run the sandbox function for testing
 sandbox()
-=======
 piazza_parse('https://piazza.com/class/k84o7ugzfyn2l7?cid=681')
->>>>>>> aa290eea6f459b70ff4c4852d3cb067670f6b7a0
+
 
     
