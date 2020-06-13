@@ -53,54 +53,40 @@ def piazza_parse(pi_url):
     temp += question_text + '\n\n'
 
     answers = post["children"]
-    temp += "__**ANSWERS**__\n"
+
     #TODO concatenate all answers? or just one
     #temp += answers
-
-    return temp
-
-def sandbox():
-    p = Piazza()
-    p.user_login(email=os.environ['EMAIL'], password=os.environ['PASSWORD'])
-
-    piazza_url = urlparse(sys.argv[1])
-
-    class_id = piazza_url.path.split('/')[2]
-    post_num = piazza_url.query.split('=')[1]
     
-    # Returns a class network
-    class_net = p.network(class_id)
-
-    post = class_net.get_post(post_num)
-
-    answers = post["children"]
     s_answer_json = None
     i_answer_json = None
-    print("ANSWERS")
+
     for answer in answers:
-        pprint(answer)
         if answer['type'] == 's_answer':
             s_answer_json = answer
         elif answer['type'] == 'i_answer':
             i_answer_json = answer
-        print()
-    print()
 
     if s_answer_json is not None:
-        print("STUDENT ANSWER")
-        s_answer = s_answer_json['history'][0]
-        pprint(s_answer)
-    print()
+        temp += "__**STUDENT ANSWER**__\n"
+        s_answer = s_answer_json['history'][0]['content']
+        s_answer_text = BeautifulSoup(s_answer, features='lxml').text
+        temp += s_answer_text + '\n\n'
 
     if i_answer_json is not None:
-        print("INSTRUCTOR ANSWER")
-        i_answer = i_answer_json['history']
-        pprint(i_answer)
-    print()
+        temp += "__**INSTRUCTOR ANSWER**__\n"
+        i_answer = i_answer_json['history'][0]['content']
+        i_answer_text = BeautifulSoup(i_answer, features='lxml').text
+        temp += i_answer_text
+
+    #     print(i_answer_text)
+    # print()
+
+
+    return temp
 
 # When you run this file, it will run the sandbox function for testing
-sandbox()
-piazza_parse('https://piazza.com/class/k84o7ugzfyn2l7?cid=681')
+
+# piazza_parse('https://piazza.com/class/k84o7ugzfyn2l7?cid=681')
 
 
     
