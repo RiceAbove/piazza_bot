@@ -10,6 +10,7 @@ def piazza_parse(pi_url):
     temp = ""
     p = Piazza()
     p.user_login(email=os.environ['EMAIL'], password=os.environ['PASSWORD'])
+    classes = p.get_user_classes()
 
     #piazza_url = urlparse(sys.argv[1])
     piazza_url = urlparse(pi_url)
@@ -22,6 +23,10 @@ def piazza_parse(pi_url):
 
     post = class_net.get_post(post_num)
 
+    class_name = "None"
+    for i in classes:
+        if i['nid'] == class_id:
+            class_name = i['num']
     question = post["history"][0]["content"]
     subject = post["history"][0]["subject"]
 
@@ -30,9 +35,11 @@ def piazza_parse(pi_url):
     # print(post["history"][0])
     # print()
 
+    temp += "__**CLASS NAME**__\n"
+    temp += class_name + '\n\n'
     temp += "__**SUBJECT**__\n"
     temp += subject + '\n\n'
-    print()
+
 
     # Content of post that includes html tags
     #
@@ -52,6 +59,7 @@ def piazza_parse(pi_url):
 
     return temp
 
+<<<<<<< HEAD
 def sandbox():
     p = Piazza()
     p.user_login(email=os.environ['EMAIL'], password=os.environ['PASSWORD'])
@@ -93,5 +101,8 @@ def sandbox():
 
 # When you run this file, it will run the sandbox function for testing
 sandbox()
+=======
+piazza_parse('https://piazza.com/class/k84o7ugzfyn2l7?cid=681')
+>>>>>>> aa290eea6f459b70ff4c4852d3cb067670f6b7a0
 
     
