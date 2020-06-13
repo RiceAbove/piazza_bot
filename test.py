@@ -30,9 +30,9 @@ def piazza_parse(pi_url):
     print(post["history"][0])
     print()
 
-    temp += "SUBJECT\n"
+    temp += "**SUBJECT**\n"
     temp+='-----------------\n'
-    temp += subject + '\n'
+    temp += subject + '\n\n'
     print()
 
     # Content of post that includes html tags
@@ -42,15 +42,15 @@ def piazza_parse(pi_url):
     # print(question)
     # print()
 
-    temp += "CONTENT\n"
+    temp += "**CONTENT**\n"
     temp += '-----------------\n'
     question_text = BeautifulSoup(question, features='lxml').text
-    temp += question_text + '\n'
+    temp += question_text + '\n\n'
 
     answers = post["children"]
     print()
 
-    temp += "ANSWERS\n"
+    temp += "**ANSWERS**\n"
     temp += '-----------------\n'
     #TODO concatenate all answers? or just one
     #temp += answers
