@@ -25,13 +25,12 @@ def piazza_parse(pi_url):
     question = post["history"][0]["content"]
     subject = post["history"][0]["subject"]
 
-    print("QUESTION JSON")
-    print('-----------------')
-    print(post["history"][0])
-    print()
+    # print("QUESTION JSON")
+    # print('-----------------')
+    # print(post["history"][0])
+    # print()
 
-    temp += "**SUBJECT**\n"
-    temp+='-----------------\n'
+    temp += "__**SUBJECT**__\n"
     temp += subject + '\n\n'
     print()
 
@@ -42,16 +41,14 @@ def piazza_parse(pi_url):
     # print(question)
     # print()
 
-    temp += "**CONTENT**\n"
-    temp += '-----------------\n'
+    temp += "__**CONTENT**__\n"
     question_text = BeautifulSoup(question, features='lxml').text
     temp += question_text + '\n\n'
 
     answers = post["children"]
     print()
 
-    temp += "**ANSWERS**\n"
-    temp += '-----------------\n'
+    temp += "__**ANSWERS**__\n"
     #TODO concatenate all answers? or just one
     #temp += answers
 
